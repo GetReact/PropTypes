@@ -58,6 +58,13 @@ class PersonList extends Component {
         age: 27,
         info: 'baaa aaaaa aaaaaaaaaaa aaaa aaaaa nn nnnnn nnnnnn'
       }
+      {
+        id: 4,
+        img: "https://randomuser.me/api/portraits/thumb/men/22.jpg",
+        name: 'Fred',
+        age: 33,
+        info: 'baaa ccc cc aaaa zzzzzzzz nn zzzzz nnnnnn'
+      }
     ]
   }
   render() {
