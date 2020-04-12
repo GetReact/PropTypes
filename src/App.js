@@ -63,7 +63,7 @@ class PersonList extends Component {
         img: "https://randomuser.me/api/portraits/thumb/men/22.jpg",
         name: 'Fred',
         age: 33,
-        info: 'baaa ccc cc aaaa zzzzzzzz nn zzzzz nnnnnn'
+        info: 'baaa ccc cc aaaa zzzzzzzz nn zzzzzgit push -u origin nnnnnn'
       }
     ]
   }
