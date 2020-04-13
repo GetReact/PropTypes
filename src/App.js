@@ -1,102 +1,84 @@
-import React from 'react';
-import './App.css';
-import { Component } from 'react';
-import PropTypes from 'prop-types'
+import React, { Component } from "react";
+import "./App.css";
+// controlled uncontrolled inputs
+// JS
+// const input = document.getElementById('myText');
+// const inputValue = input.value;
+// React
+// value, onChange
 
-const Person = ({ person: { img, name, age, info } }) => {
-  //OR const { img, name, age, info} = props.person
-  return (
-    <article>
-      <img src={img} alt="person" />
-      <h4>name : {name}</h4>
-      <h4>age : {age}</h4>
-      <h4>info : {info || "default info"}</h4>
-    </article>
-  )
-}
-Person.propTypes = {
-  // img: PropTypes.string.isRequired,
-  // name: PropTypes.string.isRequired,
-  // age: PropTypes.number.isRequired,
-  // info: PropTypes.string.isRequired,
-  person: PropTypes.shape({
-    img: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    age: PropTypes.number.isRequired,
-    info: PropTypes.string.isRequired,
-
-  })
-};
-Person.defaultProps = {
-  // img: 'https://randomuser.me/api/portraits/thumb/men/1.jpg',
-  // name: 'Bob',
-  // age: 12,
-  // info: 'default info about the person'
-  person: {
-    info: 'default info about the person'
-  }
-}
-class PersonList extends Component {
+class Form extends Component {
   state = {
-    people: [
-      {
-        id: 1,
-        img: "https://randomuser.me/api/portraits/thumb/men/75.jpg",
-        name: 'Daniel',
-        age: 15
-      },
-      {
-        id: 2,
-        img: "https://randomuser.me/api/portraits/thumb/men/66.jpg",
-        name: 'Grace',
-        age: 29
-      },
-      {
-        id: 3,
-        img: "https://randomuser.me/api/portraits/thumb/men/33.jpg",
-        name: 'Peter',
-        age: 27,
-        info: 'baaa aaaaa aaaaaaaaaaa aaaa aaaaa nn nnnnn nnnnnn'
-      }
-      {
-        id: 4,
-        img: "https://randomuser.me/api/portraits/thumb/men/22.jpg",
-        name: 'Fred',
-        age: 33,
-        info: 'baaa ccc cc aaaa zzzzzzzz nn zzzzzgit push -u origin nnnnnn'
-      }
-    ]
-  }
+    firstName: "",
+    lastName: "",
+    people: []
+  };
+  handleChange = event => {
+    // console.log(event.target);
+    console.log(event.target.name);
+    console.log(event.target.value);
+
+    // if (event.target.name === "firstName") {
+    //   const textValue = event.target.value;
+
+    //   this.setState({
+    //     firstName: textValue
+    //   });
+    // }
+
+    this.setState({
+      [event.target.name]: [event.target.value]
+    });
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    const firstName = this.state.firstName;
+    const lastName = this.state.lastName;
+    if (firstName.length > 0 && lastName.length > 0) {
+      const person = ` ${firstName} ${lastName} `;
+      this.setState({
+        people: [...this.state.people, person],
+        firstName: "",
+        lastName: ""
+      });
+    }
+    //console.log(this.state.people)
+  };
+
   render() {
     return (
       <section>
-        {
-          this.state.people.map(
-            (person) => (
-              <Person key={person.id}
-                person={person}>
-              </Person>
-            )
-          )
-        }
+        <article>
+          <form onSubmit={this.handleSubmit}>
+            <input
+              type="text"
+              name="firstName"
+              value={this.state.firstName}
+              onChange={this.handleChange}
+            />
+            <input
+              type="text"
+              name="lastName"
+              value={this.state.lastName}
+              onChange={this.handleChange}
+            />
+            <button type="submit">submit</button>
+          </form>
+        </article>
+        <article>
+          <h1>people</h1>
+          <div>{this.state.people}</div>
+        </article>
       </section>
-    )
+    );
   }
 }
-
-
 
 class App extends Component {
-
-
   render() {
-    return (
-      <div>
-        <PersonList />
-      </div>
-    )
+    return <Form />;
   }
 }
-
 
 export default App;
